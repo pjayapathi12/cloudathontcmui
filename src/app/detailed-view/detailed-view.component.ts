@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorDetails, DetailByEnv, DailyStats, ErrorView } from '../errors.model';
+import { Subscription } from 'rxjs';
+import { DetailByEnv, ErrorDetails, ErrorView } from '../models/ErrorSummary';
+
+import { TcmService } from '../services/tcm-service';
 
 @Component({
     selector: 'detailed-view',
@@ -15,230 +18,23 @@ export class DetailedViewComponent implements OnInit {
   errors404: ErrorDetails[] = [];
   errorsGeneral: ErrorDetails[] = [];
   errorList: ErrorView[] = [];
+  sub!: Subscription;
+  errorMessage:string;
 
-  constructor() {
+  constructor(private tcmService: TcmService) {
     
   }
 
   ngOnInit(): void {
     this.getErrorDetails();
 
-    this.groupErrorsByType();
+    //this.groupErrorsByType();
     // this.errors500 = this.getErrorsByType('500');
     // this.errors400 = this.getErrorsByType('400');
     // this.errors404 = this.getErrorsByType('404');
 
-    this.splitErrorsByEnv();
+   // this.splitErrorsByEnv();
     console.log('errorList', this.errorList);
-  }
-
-  getErrorDetails() {
-    this.errorDetails = [
-        {
-            errorName: "clientauth/mergeForms",
-            errorType: "500",
-            jira: "ABC-2201",
-            jiraStatus: "Open",
-            resourceName: "clientauth",
-            data: [
-                {
-                    env: "PROD",
-                    total: 10,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 6
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 4
-                        }
-                    ]
-                },
-                {
-                    env: "QA",
-                    total: 5,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 3
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 2
-                        }
-                    ]
-                },
-                {
-                    env: "QA1",
-                    total: 0,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 0
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            errorName: "clientauth/formSearch",
-            errorType: "500",
-            jira: "ABC-2202",
-            jiraStatus: "Closed",
-            resourceName: "clientauth",
-            data: [
-                {
-                    env: "PROD",
-                    total: 0,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 0
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 0
-                        }
-                    ]
-                },
-                {
-                    env: "QA",
-                    total: 5,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 3
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 2
-                        }
-                    ]
-                },
-                {
-                    env: "QA1",
-                    total: 10,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 10
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            errorName: "clientauth/getUserDetails",
-            errorType: "400",
-            jira: "",
-            jiraStatus: "",
-            resourceName: "clientauth",
-            data: [
-                {
-                    env: "PROD",
-                    total: 7,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 3
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 4
-                        }
-                    ]
-                },
-                {
-                    env: "QA",
-                    total: 23,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 14
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 9
-                        }
-                    ]
-                },
-                {
-                    env: "QA1",
-                    total: 0,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 0
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 0
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            errorName: "clientauth/formMatch",
-            errorType: "400",
-            jira: "ABC-2203",
-            jiraStatus: "Open",
-            resourceName: "clientauth",
-            data: [
-                {
-                    env: "PROD",
-                    total: 0,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 0
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 0
-                        }
-                    ]
-                },
-                {
-                    env: "QA",
-                    total: 5,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 3
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 2
-                        }
-                    ]
-                },
-                {
-                    env: "QA1",
-                    total: 10,
-                    dailyStats: [
-                        {
-                            date: "2022/02/25",
-                            count: 10
-                        },
-                        {
-                            date: "2022/02/24",
-                            count: 0
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
   }
 
   getCount(data: DetailByEnv[], env: string): number {
@@ -253,6 +49,17 @@ export class DetailedViewComponent implements OnInit {
         return nonprod.total > 0 && prod.total <= 0;
     }
     return false;
+  }
+
+  getErrorDetails() {
+    this.sub = this.tcmService.getTcmErrorSummary(1232343).subscribe({
+        next: errorDetails => {
+          this.errorDetails = errorDetails;
+          this.groupErrorsByType();
+          this.splitErrorsByEnv();
+         },
+        error: err => this.errorMessage = err
+      });
   }
 
   getErrorsByType(type: string): any[] {

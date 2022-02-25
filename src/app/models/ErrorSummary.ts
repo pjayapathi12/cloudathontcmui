@@ -1,20 +1,20 @@
-export class ErrorSummary {
+export interface ErrorSummary {
     resourceName: string;
     summaryViewStats?: Array<SummaryByEnv>;
 }
 
-export class SummaryByEnv {
+export interface SummaryByEnv {
     env: string;
     totalCount: number;
     error?: Array<ErrorTypeCount>;
 }
 
-export class ErrorTypeCount {
+export interface ErrorTypeCount {
     errorType: string;
     errorCount: number;
 }
 
-export class ErrorDetails {
+export interface ErrorDetails {
     errorName: string;
     errorType: string;
     jira: string;
@@ -23,18 +23,18 @@ export class ErrorDetails {
     data?: Array<DetailByEnv>;
 }
 
-export class DetailByEnv {
+export interface DetailByEnv {
     env: string;
     total: number;
     dailyStats?: Array<DailyStats>;
 }
 
-export class DailyStats {
+export interface DailyStats {
     date: string;
     count: number
 }
 
-export class ErrorView {
+export interface ErrorView {
     env: string;
     errorType: string;
     errorName: string;
