@@ -18,7 +18,12 @@
     border: 1px solid;
 }
 
-.net-new-error {
+.error-color {
     color: red;
     font-weight: bold;
+}
+
+.warning-color {
+    color: orange;
+    /* font-weight: bold; */
 }

@@ -37,7 +37,7 @@ export class DetailedViewComponent implements OnInit {
         {
             errorName: "clientauth/mergeForms",
             errorType: "500",
-            jira: "ABC-2202",
+            jira: "ABC-2201",
             jiraStatus: "Open",
             resourceName: "clientauth",
             data: [
@@ -178,6 +178,57 @@ export class DetailedViewComponent implements OnInit {
                         {
                             date: "2022/02/25",
                             count: 0
+                        },
+                        {
+                            date: "2022/02/24",
+                            count: 0
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            errorName: "clientauth/formMatch",
+            errorType: "400",
+            jira: "ABC-2203",
+            jiraStatus: "Open",
+            resourceName: "clientauth",
+            data: [
+                {
+                    env: "PROD",
+                    total: 0,
+                    dailyStats: [
+                        {
+                            date: "2022/02/25",
+                            count: 0
+                        },
+                        {
+                            date: "2022/02/24",
+                            count: 0
+                        }
+                    ]
+                },
+                {
+                    env: "QA",
+                    total: 5,
+                    dailyStats: [
+                        {
+                            date: "2022/02/25",
+                            count: 3
+                        },
+                        {
+                            date: "2022/02/24",
+                            count: 2
+                        }
+                    ]
+                },
+                {
+                    env: "QA1",
+                    total: 10,
+                    dailyStats: [
+                        {
+                            date: "2022/02/25",
+                            count: 10
                         },
                         {
                             date: "2022/02/24",

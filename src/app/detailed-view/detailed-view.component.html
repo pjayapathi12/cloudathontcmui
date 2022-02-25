@@ -79,7 +79,7 @@
                     <th>JIRA Status</th>
                     <th>Net New</th>
                 </tr>
-                <tr *ngFor="let error of errors500" [ngClass]="{'net-new-error': isNetNew(error.data)}">
+                <tr *ngFor="let error of errors500" [ngClass]="{'error-color': isNetNew(error.data) && error.jiraStatus != 'Closed', 'warning-color': isNetNew(error.data)  && error.jiraStatus == 'Closed'}">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
                     <td>{{getCount(error.data, 'QA')}}</td>
@@ -122,7 +122,7 @@
                     <th>JIRA Status</th>
                     <th>Net New</th>
                 </tr>
-                <tr *ngFor="let error of errors400">
+                <tr *ngFor="let error of errors400"  [ngClass]="{'error-color': isNetNew(error.data) && error.jiraStatus != 'Closed', 'warning-color': isNetNew(error.data)  && error.jiraStatus == 'Closed'}">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
                     <td>{{getCount(error.data, 'QA')}}</td>
@@ -166,7 +166,7 @@
                     <th>JIRA Status</th>
                     <th>Net New</th>
                 </tr>
-                <tr *ngFor="let error of errors404">
+                <tr *ngFor="let error of errors404"  [ngClass]="{'error-color': isNetNew(error.data)}">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
                     <td>{{getCount(error.data, 'QA')}}</td>
