@@ -8,3 +8,17 @@
     display: table;
     clear: both;
 }
+
+.error-table {
+    width: 100%;
+    border: 1px solid;
+}
+
+.error-table>th, td {
+    border: 1px solid;
+}
+
+.net-new-error {
+    color: red;
+    font-weight: bold;
+}

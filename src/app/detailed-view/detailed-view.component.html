@@ -8,10 +8,10 @@
         </div>
     </div>
 
-    <h3>All Errors</h3>
+    <!-- <h3>All Errors</h3>
     <div class="row">
         <div class="two-column">
-            <table>
+            <table class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
@@ -29,7 +29,7 @@
             </table>
         </div>
         <div class="two-column">
-            <table>
+            <table class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
@@ -47,12 +47,12 @@
             </table>
         </div>
     </div>
-    <br>
+    <br> -->
 
     <h3>500 Errors</h3>
     <div class="row">
         <div class="two-column">
-            <table>
+            <table *ngIf="errors500" class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
@@ -63,27 +63,29 @@
                 <tr *ngFor="let error of errors500">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
-                    <td>--</td>
+                    <td>{{getCount(error.data, 'PROD')}}</td>
                     <td>{{error.jira}}</td>
                     <td>{{error.jiraStatus}}</td>
                 </tr>
             </table>
         </div>
         <div class="two-column">
-            <table>
+            <table class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
                     <th>Count</th>
                     <th>JIRA</th>
                     <th>JIRA Status</th>
+                    <th>Net New</th>
                 </tr>
-                <tr *ngFor="let error of errors500">
+                <tr *ngFor="let error of errors500" [ngClass]="{'net-new-error': isNetNew(error.data)}">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
-                    <td>--</td>
+                    <td>{{getCount(error.data, 'QA')}}</td>
                     <td>{{error.jira}}</td>
                     <td>{{error.jiraStatus}}</td>
+                    <td>{{isNetNew(error.data)}}</td>
                 </tr>
             </table>
         </div>
@@ -93,7 +95,7 @@
     <h3>400 Errors</h3>
     <div class="row">
         <div class="two-column">
-            <table>
+            <table class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
@@ -104,27 +106,29 @@
                 <tr *ngFor="let error of errors400">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
-                    <td>--</td>
+                    <td>{{getCount(error.data, 'PROD')}}</td>
                     <td>{{error.jira}}</td>
                     <td>{{error.jiraStatus}}</td>
                 </tr>
             </table>
         </div>
         <div class="two-column">
-            <table>
+            <table class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
                     <th>Count</th>
                     <th>JIRA</th>
                     <th>JIRA Status</th>
+                    <th>Net New</th>
                 </tr>
                 <tr *ngFor="let error of errors400">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
-                    <td>--</td>
+                    <td>{{getCount(error.data, 'QA')}}</td>
                     <td>{{error.jira}}</td>
                     <td>{{error.jiraStatus}}</td>
+                    <td>{{isNetNew(error.data)}}</td>
                 </tr>
             </table>
         </div>
@@ -133,7 +137,8 @@
     <h3>404 Errors</h3>
     <div class="row">
         <div class="two-column">
-            <table>
+            <div *ngIf="!errors404 || errors404.length <= 0">No errors</div>
+            <table *ngIf="errors404 && errors404.length > 0" class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
@@ -144,27 +149,30 @@
                 <tr *ngFor="let error of errors404">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
-                    <td>--</td>
+                    <td>{{getCount(error.data, 'PROD')}}</td>
                     <td>{{error.jira}}</td>
                     <td>{{error.jiraStatus}}</td>
                 </tr>
             </table>
         </div>
         <div class="two-column">
-            <table>
+            <div *ngIf="!errors404 || errors404.length <= 0">No errors</div>
+            <table *ngIf="errors404 && errors404.length > 0" class="error-table">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
                     <th>Count</th>
                     <th>JIRA</th>
                     <th>JIRA Status</th>
+                    <th>Net New</th>
                 </tr>
                 <tr *ngFor="let error of errors404">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
-                    <td>--</td>
+                    <td>{{getCount(error.data, 'QA')}}</td>
                     <td>{{error.jira}}</td>
                     <td>{{error.jiraStatus}}</td>
+                    <td>{{isNetNew(error.data)}}</td>
                 </tr>
             </table>
         </div>

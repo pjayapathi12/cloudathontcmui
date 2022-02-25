@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ErrorDetails, DetailByEnv, DailyStats } from '../errors.model';
+import { ErrorDetails, DetailByEnv, DailyStats, ErrorView } from '../errors.model';
 
 @Component({
     selector: 'detailed-view',
@@ -14,6 +14,7 @@ export class DetailedViewComponent implements OnInit {
   errors400: ErrorDetails[] = [];
   errors404: ErrorDetails[] = [];
   errorsGeneral: ErrorDetails[] = [];
+  errorList: ErrorView[] = [];
 
   constructor() {
     
@@ -21,14 +22,14 @@ export class DetailedViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getErrorDetails();
-    
+
     this.groupErrorsByType();
     // this.errors500 = this.getErrorsByType('500');
     // this.errors400 = this.getErrorsByType('400');
     // this.errors404 = this.getErrorsByType('404');
 
-    // this.prodErrors = this.getErrorsByEnv('PROD');
-    // this.qaErrors = this.getErrorsByEnv('QA');
+    this.splitErrorsByEnv();
+    console.log('errorList', this.errorList);
   }
 
   getErrorDetails() {
@@ -93,15 +94,15 @@ export class DetailedViewComponent implements OnInit {
             data: [
                 {
                     env: "PROD",
-                    total: 15,
+                    total: 0,
                     dailyStats: [
                         {
                             date: "2022/02/25",
-                            count: 9
+                            count: 0
                         },
                         {
                             date: "2022/02/24",
-                            count: 6
+                            count: 0
                         }
                     ]
                 },
@@ -144,11 +145,11 @@ export class DetailedViewComponent implements OnInit {
             data: [
                 {
                     env: "PROD",
-                    total: 10,
+                    total: 7,
                     dailyStats: [
                         {
                             date: "2022/02/25",
-                            count: 6
+                            count: 3
                         },
                         {
                             date: "2022/02/24",
@@ -158,15 +159,15 @@ export class DetailedViewComponent implements OnInit {
                 },
                 {
                     env: "QA",
-                    total: 5,
+                    total: 23,
                     dailyStats: [
                         {
                             date: "2022/02/25",
-                            count: 3
+                            count: 14
                         },
                         {
                             date: "2022/02/24",
-                            count: 2
+                            count: 9
                         }
                     ]
                 },
@@ -189,13 +190,26 @@ export class DetailedViewComponent implements OnInit {
     ]
   }
 
+  getCount(data: DetailByEnv[], env: string): number {
+    let match = data.find(ele => ele.env == env);
+    return match ? match.total : 0;
+  }
+
+  isNetNew(data: DetailByEnv[]): boolean {
+    if (data) {
+        let prod = data.find(ele => ele.env == 'PROD');
+        let nonprod = data.find(ele => ele.env == 'QA');
+        return nonprod.total > 0 && prod.total <= 0;
+    }
+    return false;
+  }
+
   getErrorsByType(type: string): any[] {
     let errors = this.errorDetails.filter(
         error => {
             return error.errorType == type
         }
     );
-    console.log(type + ' Errors: ', errors);
     return errors;
   }
 
@@ -220,6 +234,67 @@ export class DetailedViewComponent implements OnInit {
     )
   }
 
+  
+
+  splitErrorsByEnv() {  
+    this.errors500.forEach(error => {
+        error.data.forEach(envData => {
+            let ele = {
+                env: envData.env,
+                errorType: error.errorType,
+                errorName: error.errorName,
+                jira: error.jira,
+                jiraStatus: error.jiraStatus,
+                count: envData.total,
+                isNetNew: false // TO DO
+            };
+            this.errorList.push(ele);
+        })
+      });
+      this.errors400.forEach(error => {
+        error.data.forEach(envData => {
+            let ele = {
+                env: envData.env,
+                errorType: error.errorType,
+                errorName: error.errorName,
+                jira: error.jira,
+                jiraStatus: error.jiraStatus,
+                count: envData.total,
+                isNetNew: false // TO DO
+            };
+            this.errorList.push(ele);
+        })
+      });
+      this.errors404.forEach(error => {
+        error.data.forEach(envData => {
+            let ele = {
+                env: envData.env,
+                errorType: error.errorType,
+                errorName: error.errorName,
+                jira: error.jira,
+                jiraStatus: error.jiraStatus,
+                count: envData.total,
+                isNetNew: false // TO DO
+            };
+            this.errorList.push(ele);
+        })
+      });
+      this.errorsGeneral.forEach(error => {
+        error.data.forEach(envData => {
+            let ele = {
+                env: envData.env,
+                errorType: error.errorType,
+                errorName: error.errorName,
+                jira: error.jira,
+                jiraStatus: error.jiraStatus,
+                count: envData.total,
+                isNetNew: false // TO DO
+            };
+            this.errorList.push(ele);
+        })
+      });
+  }
+
 //   getErrorsByEnv(env: string): ErrorDetails[] {
 //     let errors = this.errorDetails.filter(
 //         error => {
@@ -242,10 +317,6 @@ export class DetailedViewComponent implements OnInit {
 //     );
 //     return filteredErrors;
 //   }
-
-  getErrorsByTypeAndEnv() {
-
-  }
 
 }
 

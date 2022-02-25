@@ -33,3 +33,13 @@ export class DailyStats {
     date: string;
     count: number
 }
+
+export class ErrorView {
+    env: string;
+    errorType: string;
+    errorName: string;
+    jira: string;
+    jiraStatus: string;
+    count: number;
+    isNetNew: boolean;
+}
