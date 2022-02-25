@@ -1,6 +1,174 @@
-<div>
-    <div>
-        Error Name: {{errorDetails.errorName}}
+<div class="container">
+    <div class="row">
+        <div class="two-column">
+            <h2>PROD</h2>
+        </div>
+        <div class="two-column">
+            <h2>QA</h2>
+        </div>
     </div>
+
+    <h3>All Errors</h3>
+    <div class="row">
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errorDetails">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errorDetails">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <h3>500 Errors</h3>
+    <div class="row">
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errors500">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errors500">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+
+    <h3>400 Errors</h3>
+    <div class="row">
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errors400">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errors400">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <h3>404 Errors</h3>
+    <div class="row">
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errors404">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="two-column">
+            <table>
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                </tr>
+                <tr *ngFor="let error of errors404">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>--</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
 </div>
   
