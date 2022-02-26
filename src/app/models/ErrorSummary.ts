@@ -53,4 +53,6 @@ export interface ErrorRow { //For combined prod & non-prod view
     nonProdCount: number;
     totalCount?: number;
     isNetNew: boolean;
+    isFlagged?: boolean;
+    issueDescription?: string;
 }

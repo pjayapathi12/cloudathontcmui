@@ -1,33 +1,22 @@
-.two-column {
-    float: left;
-    width: 50%;
-}
-
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-.table {
+table {
     width: 100%;
+    border-collapse: collapse;
 }
 
-.error-table {
-    width: 100%;
-    border: 1px solid;
-}
-
-.error-table>th, td {
-    border: 1px solid;
+th, td {
+    text-align: left;
+    padding: 5px;
+    border: 1px solid rgb(145, 145, 145);
 }
 
 .error-color {
-    color: red;
-    font-weight: bold;
+    background-color: red;
+    /* color: red; */
+    /* font-weight: bold; */
 }
 
 .warning-color {
-    color: orange;
-    font-weight: bold;
+    background-color: orange;
+    /* color: orange; */
+    /* font-weight: bold; */
 }
