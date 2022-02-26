@@ -50,6 +50,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'bannisters-webapp-angular2'
-          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1D1A7ABF15D9414CA1609512B90FF1CB }}
-          package: .
+          package: ./dist/cloudathontcmui
