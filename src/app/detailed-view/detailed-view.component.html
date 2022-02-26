@@ -1,3 +1,27 @@
+<!-- Combine Prod & Non-Prod -->
+<div class="container">
+    <div class="row">
+        <h3>500 Errors</h3>
+        <error-table [errorData]="errorList500"></error-table>
+    </div>
+    <div class="row">
+        <h3>400 Errors</h3>
+        <error-table [errorData]="errorList400"></error-table>
+    </div>
+    <div class="row">
+        <h3>404 Errors</h3>
+        <error-table [errorData]="errorList404"></error-table>
+    </div>
+    <div class="row">
+        <h3>Other Errors</h3>
+        <error-table [errorData]="errorListOther"></error-table>
+    </div>
+    <br>
+</div>
+
+<hr>
+
+<!-- Separate Prod & Non-Prod -->
 <div class="container">
     <div class="row">
         <div class="two-column">
@@ -177,6 +201,30 @@
             </table>
         </div>
     </div>
-    
 </div>
+
+
+<!-- <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field> -->
+  
+  <!-- <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <ng-container matColumnDef="errorName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Error Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.errorName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="errorType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Error Type </th>
+        <td mat-cell *matCellDef="let row"> {{row.errorType}} </td>
+      </ng-container>
+
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div> -->
   

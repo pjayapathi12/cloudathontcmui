@@ -1,0 +1,25 @@
+<div class="container">
+    <div *ngIf="!errorData || errorData.length <= 0">No errors</div>
+    <table *ngIf="errorData && errorData.length > 0" class="error-table">
+                <tr>
+                    <th>Error</th>
+                    <th>Error Type</th>
+                    <th>Prod Count</th>
+                    <th>Non Prod Count</th>
+                    <th>Total Count</th>
+                    <th>JIRA</th>
+                    <th>JIRA Status</th>
+                    <th>Net New</th>
+                </tr>
+                <tr *ngFor="let error of errorData" [ngClass]="{'error-color': error.isNetNew && error.jiraStatus != 'Closed', 'warning-color': error.isNetNew  && error.jiraStatus == 'Closed'}">
+                    <td>{{error.errorName}}</td>
+                    <td>{{error.errorType}}</td>
+                    <td>{{error.prodCount}}</td>
+                    <td>{{error.nonProdCount}}</td>
+                    <td>{{error.totalCount}}</td>
+                    <td>{{error.jira}}</td>
+                    <td>{{error.jiraStatus}}</td>
+                    <td>{{error.isNetNew}}</td>
+                </tr>
+    </table>
+</div>   

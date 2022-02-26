@@ -43,3 +43,14 @@ export interface ErrorView {
     count: number;
     isNetNew: boolean;
 }
+
+export interface ErrorRow { //For combined prod & non-prod view
+    errorType: string;
+    errorName: string;
+    jira: string;
+    jiraStatus: string;
+    prodCount: number;
+    nonProdCount: number;
+    totalCount?: number;
+    isNetNew: boolean;
+}
