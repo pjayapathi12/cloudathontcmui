@@ -1,6 +1,6 @@
 <div class="container">
-    <div *ngIf="!errorData || errorData.length <= 0">No errors</div>
-    <table *ngIf="errorData && errorData.length > 0" class="error-table">
+    <div *ngIf="!errorData || errorData.length <= 0">No errors in the past 14 days</div>
+    <table *ngIf="errorData && errorData.length > 0">
                 <tr>
                     <th>Error</th>
                     <th>Error Type</th>
@@ -10,16 +10,21 @@
                     <th>JIRA</th>
                     <th>JIRA Status</th>
                     <th>Net New</th>
+                    <!-- <th>Issue</th> -->
                 </tr>
-                <tr *ngFor="let error of errorData" [ngClass]="{'error-color': error.isNetNew && error.jiraStatus != 'Closed', 'warning-color': error.isNetNew  && error.jiraStatus == 'Closed'}">
+                <!-- Highlights whole row -->
+                <!-- <tr *ngFor="let error of errorData" [ngClass]="{'error-color': error.isNetNew && error.jiraStatus != 'Closed', 'warning-color': error.isNetNew  && error.jiraStatus == 'Closed'}"> -->
+                <tr *ngFor="let error of errorData">
                     <td>{{error.errorName}}</td>
                     <td>{{error.errorType}}</td>
                     <td>{{error.prodCount}}</td>
                     <td>{{error.nonProdCount}}</td>
                     <td>{{error.totalCount}}</td>
-                    <td>{{error.jira}}</td>
+                    <td *ngIf="error.jira">{{error.jira}}</td>
+                    <td *ngIf="!error.jira" class="error-color">Missing</td>
                     <td>{{error.jiraStatus}}</td>
-                    <td>{{error.isNetNew}}</td>
+                    <td [ngClass]="{'error-color': error.isNetNew && error.jiraStatus != 'Closed', 'warning-color': error.isNetNew  && error.jiraStatus == 'Closed'}">{{error.isNetNew}}</td>
+                    <!-- <td>{{error.issueDescription}}</td> -->
                 </tr>
     </table>
 </div>   
