@@ -1,0 +1,85 @@
+<!-- <p>summary-view works!</p> -->
+<!-- <div style="width:0px;height:50px">
+    <canvas id="myChart"></canvas>
+</div> -->
+
+
+<div class="container" style="background-color: blanchedalmond;">
+    <div class="row">
+        <div class="col-sm-4">
+            <label>application site</label>
+            <form>
+                <select>
+                    <option value="bwflegacysvc"> bwflegacysvc
+                    </option>
+                    <option value="clientauth"> clientauth
+                    </option>
+                </select>
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <label>Non Prod Env</label>
+            <form>
+                <select>
+                    <option value="qa"> QA
+                    </option>
+                    <option value="qa1"> QA1
+                    </option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            Prod Env Total
+        </div>
+        <div class="col-sm-8">
+            Non Prod Env Total
+        </div>
+    </div>
+    <div class="row" style="border: 1px solid; text-align: center;">
+        <div class="col-sm-4">
+            <h2>{{prodErrCount}}</h2>
+        </div>
+        <div class="col-sm-8">
+            <h2>{{qaErrCount}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3 style="text-align: center;">Error Count</h3>
+            <div id="chart">
+                <apx-chart
+                  [series]="prodChartOptions.series"
+                  [chart]="prodChartOptions.chart"
+                  [labels]="prodChartOptions.labels"
+                  [responsive]="prodChartOptions.responsive"
+                ></apx-chart>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="">
+                <div class="col-sm-5" id="chart">
+                    <h3 style="text-align: center;">Error Count</h3>
+                    <apx-chart
+                    [series]="qaChartOptions.series"
+                    [chart]="qaChartOptions.chart"
+                    [labels]="qaChartOptions.labels"
+                    [responsive]="qaChartOptions.responsive"
+                    ></apx-chart>
+                </div>
+                <div class="col-sm-5" id="chart">
+                    <h3 style="text-align: center;">Net New Error Count</h3>
+                    <apx-chart
+                    [series]="netNewChartOptions.series"
+                    [chart]="netNewChartOptions.chart"
+                    [labels]="netNewChartOptions.labels"
+                    [responsive]="netNewChartOptions.responsive"
+                    ></apx-chart>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+

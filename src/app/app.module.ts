@@ -12,12 +12,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ErrorTableComponent } from './error-table/error-table.component';
+import { SummaryViewComponent } from './summary-view/summary-view.component';
+import { NgApexchartsModule } from "ng-apexcharts";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DetailedViewComponent,
-    ErrorTableComponent
+    ErrorTableComponent,
+    SummaryViewComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { ErrorTableComponent } from './error-table/error-table.component';
     MatPaginatorModule, 
     MatProgressSpinnerModule, 
     MatSortModule, 
-    MatTableModule
+    MatTableModule,
+    NgApexchartsModule
   ],
   bootstrap: [AppComponent]
 })
