@@ -46,7 +46,7 @@ export class DetailedViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.setParams();
-    this.getErrorDetails(true);
+    this.getErrorDetails(false);
   }
 
   setParams() {
