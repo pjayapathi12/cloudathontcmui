@@ -1,308 +1,36 @@
 [
     {
-        "errorName": "clientauth/mergeForms",
-        "errorType": "500",
-        "jira": "ABC-2201",
-        "jiraStatus": "Open",
-        "resourceName": "clientauth",
-        "data": [
+        "resourceName": "clientauth/mergeForms",
+        "summaryViewStats":[
             {
                 "env": "PROD",
-                "total": 10,
-                "dailyStats": [
+                "totalCount": 10,
+                "error":[
                     {
-                        "date": "2022/02/25",
-                        "count": 6
+                        "errorType":"500",
+                        "errorCount":10
                     },
                     {
-                        "date": "2022/02/24",
-                        "count": 4
+                        "errorType":"400",
+                        "errorCount":10
                     }
                 ]
+                
             },
             {
                 "env": "QA",
-                "total": 5,
-                "dailyStats": [
+                "totalCount": 10,
+                "error":[
                     {
-                        "date": "2022/02/25",
-                        "count": 3
+                        "errorType":"500",
+                        "errorCount":10
                     },
                     {
-                        "date": "2022/02/24",
-                        "count": 2
-                    }
-                ]
-            },
-            {
-                "env": "QA1",
-                "total": 0,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 0
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "errorName": "clientauth/formSearch",
-        "errorType": "500",
-        "jira": "ABC-2202",
-        "jiraStatus": "Closed",
-        "resourceName": "clientauth",
-        "data": [
-            {
-                "env": "PROD",
-                "total": 0,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 0
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "env": "QA",
-                "total": 5,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 3
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 2
-                    }
-                ]
-            },
-            {
-                "env": "QA1",
-                "total": 10,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 10
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "errorName": "clientauth/getUserDetails",
-        "errorType": "400",
-        "jira": "",
-        "jiraStatus": "",
-        "resourceName": "clientauth",
-        "data": [
-            {
-                "env": "PROD",
-                "total": 10,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 6
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 4
-                    }
-                ]
-            },
-            {
-                "env": "QA",
-                "total": 5,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 3
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 2
-                    }
-                ]
-            },
-            {
-                "env": "QA1",
-                "total": 0,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 0
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "errorName": "clientauth/formMatch",
-        "errorType": "400",
-        "jira": "ABC-2208",
-        "jiraStatus": "Open",
-        "resourceName": "clientauth",
-        "data": [
-            {
-                "env": "PROD",
-                "total": 0,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 0
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "env": "QA",
-                "total": 5,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 3
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 2
-                    }
-                ]
-            },
-            {
-                "env": "QA1",
-                "total": 10,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 10
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "errorName": "branchworkflow/getUser",
-        "errorType": "400",
-        "jira": "ABC-2300",
-        "jiraStatus": "Open",
-        "resourceName": "clientauth",
-        "data": [
-            {
-                "env": "PROD",
-                "total": 3,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 1
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 2
-                    }
-                ]
-            },
-            {
-                "env": "QA",
-                "total": 0,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 0
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            },
-            {
-                "env": "QA1",
-                "total": 0,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 0
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "errorName": "clientauth/formSearch",
-        "errorType": "404",
-        "jira": "ABC-2202",
-        "jiraStatus": "Closed",
-        "resourceName": "clientauth",
-        "data": [
-            {
-                "env": "PROD",
-                "total": 30,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 10
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 20
-                    }
-                ]
-            },
-            {
-                "env": "QA",
-                "total": 15,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 3
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 12
-                    }
-                ]
-            },
-            {
-                "env": "QA1",
-                "total": 10,
-                "dailyStats": [
-                    {
-                        "date": "2022/02/25",
-                        "count": 10
-                    },
-                    {
-                        "date": "2022/02/24",
-                        "count": 0
+                        "errorType":"400",
+                        "errorCount":10
                     }
                 ]
             }
         ]
     }
-]
+]  

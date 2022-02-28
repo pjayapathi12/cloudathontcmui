@@ -22,7 +22,8 @@ export class DetailedViewComponent implements OnInit {
   
   errorList: ErrorView[] = [];
 
-  nonProdEnv = 'QA';
+  nonProdEnv = 'qa';
+  prodEnv = 'prod';
   ERROR_TYPES: string[] = ['500','400','404','Other'];
 
   errorRows: ErrorRow[] = [];
@@ -41,19 +42,28 @@ export class DetailedViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getErrorDetails();
-    
   }
 
   getErrorDetails() {
-    this.sub = this.tcmService.getTcmErrorSummary(1232343).subscribe({
+    this.sub = this.tcmService.getResourceErrorDetails('123456789', 'tcmeventsvc').subscribe({
+    // this.sub = this.tcmService.getResourceErrorDetailsMock('123456789', 'tcmeventsvc').subscribe({
         next: errorDetails => {
-          this.errorDetails = errorDetails;
-          this.groupErrorsByType();
-          this.mapErrors();
-          // this.splitErrorsByEnv();
+            this.errorDetails = errorDetails;
+            errorDetails.forEach(error => {
+                let jsonData = this.parseData(error.data);
+                error.data = jsonData;
+            })
+            // console.log('errorDetails', errorDetails)
+            this.groupErrorsByType();
+            this.mapErrors();
+            // this.splitErrorsByEnv();
          },
         error: err => this.errorMessage = err
       });
+  }
+
+  parseData(dataString): any {
+    return JSON.parse(dataString);
   }
 
   groupErrorsByType() {
@@ -87,7 +97,7 @@ export class DetailedViewComponent implements OnInit {
 
   isNetNew(data: DetailByEnv[]): boolean {
     if (data) {
-        let prod = data.find(ele => ele.env == 'PROD');
+        let prod = data.find(ele => ele.env == this.prodEnv);
         let nonprod = data.find(ele => ele.env == this.nonProdEnv);
         return nonprod.total > 0 && prod.total <= 0;
     }
@@ -101,7 +111,7 @@ export class DetailedViewComponent implements OnInit {
 
     setErrorRows() {
         this.errorDetails.forEach(error => {
-            let prodCount = this.getCount(error.data, 'PROD');
+            let prodCount = this.getCount(error.data, this.prodEnv);
             let nonProdCount = this.getCount(error.data, this.nonProdEnv);
             let ele: ErrorRow = {
                 errorType: error.errorType,

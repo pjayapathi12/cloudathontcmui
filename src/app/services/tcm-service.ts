@@ -1,4 +1,5 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { TemplateDefinitionBuilder } from "@angular/compiler/src/render3/view/template";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError, map, tap } from 'rxjs/operators';
@@ -10,8 +11,10 @@ import { TcmInfo } from "../models/tcmInfo";
 })
 export class TcmService {
 private tcmUrl = 'api/tcm/tcm.json';
-  private tcmErrorSummaryUrl = 'api/tcm/tcmErrorSummary.json';
-  private tcmResourceErrorDetailsUrl = 'api/tcm/tcmResourceErrorDetails.json';
+  private tcmErrorSummaryUrl = 'https://bannisters-webapp-springboot-sql.azurewebsites.net/getSummaryView';
+  private tcmErrorSummaryMockUrl = 'api/tcm/tcmErrorSummary.json';
+  private tcmResourceErrorDetailsUrl = 'https://bannisters-webapp-springboot-sql.azurewebsites.net/getDetailedView';
+  private tcmResourceErrorDetailsMockUrl = 'api/tcm/tcmResourceErrorDetails.json';
 
   constructor(private http: HttpClient) { }
 
@@ -23,8 +26,20 @@ private tcmUrl = 'api/tcm/tcm.json';
       );
   }
 
-  getTcmErrorSummary(tcmId:number): Observable<ErrorDetails[]> {
-    return this.http.get<ErrorDetails[]>(this.tcmErrorSummaryUrl)
+  getTcmErrorSummary(tcmId:string, resourceName: string): Observable<ErrorDetails[]> {
+    let req = {
+      tcm: tcmId,
+      resourceName: resourceName
+    };
+    return this.http.post<ErrorDetails[]>(this.tcmErrorSummaryUrl, req)
+      .pipe(
+        tap(data => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  getTcmErrorSummaryMock(tcmId:string, resourceName: string): Observable<ErrorDetails[]> {
+    return this.http.get<ErrorDetails[]>(this.tcmErrorSummaryMockUrl)
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
@@ -32,8 +47,20 @@ private tcmUrl = 'api/tcm/tcm.json';
   }
 
 
-  getResourceErrorDetails(tcmId:number, resourceName: string): Observable<ErrorSummary> {
-    return this.http.get<ErrorSummary>(this.tcmResourceErrorDetailsUrl)
+  getResourceErrorDetails(tcmId:string, resourceName: string): Observable<ErrorDetails[]> {
+    let req = {
+      tcm: tcmId,
+      resourceName: resourceName
+    };
+    return this.http.post<ErrorDetails[]>(this.tcmResourceErrorDetailsUrl, req)
+      .pipe(
+        tap(data => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  getResourceErrorDetailsMock(tcmId:string, resourceName: string): Observable<ErrorDetails[]> {
+    return this.http.get<ErrorDetails[]>(this.tcmResourceErrorDetailsMockUrl)
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
