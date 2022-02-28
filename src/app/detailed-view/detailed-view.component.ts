@@ -46,7 +46,8 @@ export class DetailedViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.setParams();
-    this.getErrorDetails(false);
+    this.getErrorDetails(true);// Pass false to call service, true to mock
+    // this.getAllTCMs(false);// Pass false to call service, true to mock
   }
 
   setParams() {
@@ -60,6 +61,17 @@ export class DetailedViewComponent implements OnInit {
     if (!this.isRedis) {
         this.isRedis = 'false'
     }
+  }
+
+  // TO DO - Partha to move to Approval screen component
+  getAllTCMs(isMock: boolean) {
+    this.sub = this.tcmService.getAllTCMs(isMock).subscribe({
+        next: tcmDetails => {
+            console.log('tcmDetails from mock', tcmDetails);
+            // TO DO
+        },
+        error: err => this.errorMessage = err
+    });
   }
 
   getErrorDetails(isMock: boolean) {

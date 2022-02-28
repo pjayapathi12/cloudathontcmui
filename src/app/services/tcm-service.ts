@@ -10,7 +10,9 @@ import { TcmInfo } from "../models/tcmInfo";
   providedIn: 'root'
 })
 export class TcmService {
-private tcmUrl = 'api/tcm/tcm.json';
+  private tcmUrl = 'https://bannisters-webapp-springboot-sql.azurewebsites.net/getTCMDetails';
+  private allTcmsUrl = 'https://bannisters-webapp-springboot-sql.azurewebsites.net/getAllTCMs';
+  private allTcmsMockUrl = 'api/tcm/allTcms.json';
   private tcmErrorSummaryUrl = 'https://bannisters-webapp-springboot-sql.azurewebsites.net/getSummaryView';
   private tcmErrorSummaryMockUrl = 'api/tcm/tcmErrorSummary.json';
   private tcmResourceErrorDetailsUrl = 'https://bannisters-webapp-springboot-sql.azurewebsites.net/getDetailedView';
@@ -18,8 +20,17 @@ private tcmUrl = 'api/tcm/tcm.json';
 
   constructor(private http: HttpClient) { }
 
-  getTcmInfo(tcmId:number): Observable<TcmInfo> {
-    return this.http.get<TcmInfo>(this.tcmErrorSummaryUrl)
+  getTcmInfo(tcmId:string): Observable<TcmInfo> {
+    return this.http.get<TcmInfo>(this.tcmUrl)
+      .pipe(
+        tap(data => console.log('All: ', JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  getAllTCMs(isMock: boolean): Observable<TcmInfo[]> {
+    let url = isMock ? this.allTcmsMockUrl : this.allTcmsUrl;
+    return this.http.get<TcmInfo[]>(url)
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
