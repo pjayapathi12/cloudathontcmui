@@ -1,5 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';//Manual merge
+import { Subscription } from 'rxjs';//Manual merge
 import { ChartComponent } from "ng-apexcharts";
+import { TcmService } from '../services/tcm-service';//Manual merge
 
 import {
   ApexNonAxisChartSeries,
@@ -19,15 +21,21 @@ export type ChartOptions = {
   styleUrls: ['./summary-view.component.css']
 })
 export class SummaryViewComponent implements OnInit {
-    @ViewChild("chart") chart: ChartComponent;
+  @Input() tcmId: string;//Manual merge
+  @Input() isRedis: string;//Manual merge
+  
+  @ViewChild("chart") chart: ChartComponent;
     public prodChartOptions: Partial<ChartOptions>;
     public qaChartOptions: Partial<ChartOptions>;
     public netNewChartOptions: Partial<ChartOptions>;
     public prodErrCount = '10';
     public qaErrCount = '15';
 
+    sub!: Subscription;//Manual merge
+    errorMessage:string;//Manual merge
+
 //   constructor() { }
-constructor() {
+constructor(private tcmService: TcmService) {//Manual merge
     this.prodChartOptions = {
       series: [4, 1, 2, 5],
       chart: {
@@ -94,7 +102,36 @@ constructor() {
   }
 
   ngOnInit(): void {
+    this.setParams();//Manual merge
+    this.getErrorSummary(false);// Pass false to call service, true to mock  //Manual merge
+  }
 
+  setParams() {//Manual merge - entire method
+    // If query params not available, use hard-coded values
+    if (!this.tcmId) {
+        this.tcmId = '123456789'
+    }
+    if (!this.isRedis) {
+        this.isRedis = 'false'
+    }
+  }
+
+  getErrorSummary(isMock?: boolean) {//Manual merge - entire method
+    if (isMock) {
+      this.sub = this.tcmService.getTcmErrorSummaryMock(this.tcmId, 'ALL').subscribe({
+        next: errorSummary => {
+          console.log('getErrorSummary', errorSummary);
+        },
+        error: err => this.errorMessage = err
+      });
+    } else {
+      this.sub = this.tcmService.getTcmErrorSummary(this.tcmId, 'ALL', this.isRedis).subscribe({
+        next: errorSummary => {
+          console.log('getErrorSummary', errorSummary);
+         },
+        error: err => this.errorMessage = err
+      });
+    }
   }
 
 }
