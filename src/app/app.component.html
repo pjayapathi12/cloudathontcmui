@@ -2,6 +2,11 @@
 <div style="text-align: center;">
   <!-- <h2>Errors: Detailed View</h2> -->
   <summary-view></summary-view>
-  <detailed-view></detailed-view>
+  <collapsible-section [headerName]="'View Details'">
+    <section-content>
+      <detailed-view></detailed-view>
+    </section-content>
+  </collapsible-section>
+  
 </div>
 
