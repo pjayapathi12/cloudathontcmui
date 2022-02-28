@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { CollapsibleSectionComponent, SectionContentDirective  } from  './collapsible-section/collapsible-section.component';
 import { DetailedViewComponent } from './detailed-view/detailed-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
@@ -21,7 +22,9 @@ import { NgApexchartsModule } from "ng-apexcharts";
     AppComponent,
     DetailedViewComponent,
     ErrorTableComponent,
-    SummaryViewComponent
+    SummaryViewComponent,
+    CollapsibleSectionComponent,
+    SectionContentDirective 
   ],
   imports: [
     BrowserModule,
