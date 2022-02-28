@@ -46,7 +46,7 @@ export class DetailedViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.setParams();
-    this.getErrorDetails(true);// Pass false to call service, true to mock
+    this.getErrorDetails(false);// Pass false to call service, true to mock
     // this.getAllTCMs(false);// Pass false to call service, true to mock
   }
 
