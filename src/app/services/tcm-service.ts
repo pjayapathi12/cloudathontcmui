@@ -26,12 +26,13 @@ private tcmUrl = 'api/tcm/tcm.json';
       );
   }
 
-  getTcmErrorSummary(tcmId:string, resourceName: string): Observable<ErrorDetails[]> {
+  getTcmErrorSummary(tcmId:string, resourceName: string, isRedis: string): Observable<ErrorDetails[]> {
     let req = {
       tcm: tcmId,
       resourceName: resourceName
     };
-    return this.http.post<ErrorDetails[]>(this.tcmErrorSummaryUrl, req)
+    let url = `${this.tcmErrorSummaryUrl}?redis=${isRedis}`;
+    return this.http.post<ErrorDetails[]>(url, req)
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)
@@ -47,12 +48,13 @@ private tcmUrl = 'api/tcm/tcm.json';
   }
 
 
-  getResourceErrorDetails(tcmId:string, resourceName: string): Observable<ErrorDetails[]> {
+  getResourceErrorDetails(tcmId:string, resourceName: string, isRedis: string): Observable<ErrorDetails[]> {
     let req = {
       tcm: tcmId,
       resourceName: resourceName
     };
-    return this.http.post<ErrorDetails[]>(this.tcmResourceErrorDetailsUrl, req)
+    let url = `${this.tcmResourceErrorDetailsUrl}?redis=${isRedis}`;
+    return this.http.post<ErrorDetails[]>(url, req)
       .pipe(
         tap(data => console.log('All: ', JSON.stringify(data))),
         catchError(this.handleError)

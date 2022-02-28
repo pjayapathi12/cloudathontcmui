@@ -1,10 +1,10 @@
 
 <div style="text-align: center;">
   <!-- <h2>Errors: Detailed View</h2> -->
-  <summary-view></summary-view>
+  <summary-view [tcmId]="tcmId" [isRedis]="isRedis"></summary-view>
   <collapsible-section [headerName]="'View Details'">
     <section-content>
-      <detailed-view></detailed-view>
+      <detailed-view [tcmId]="tcmId" [isRedis]="isRedis" [resourceName]="'tcmeventsvc'"></detailed-view>
     </section-content>
   </collapsible-section>
   

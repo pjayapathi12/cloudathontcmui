@@ -1,6 +1,8 @@
-<button type="button" class="collapsible" (click)="toggleModule()">{{headerName}}</button>
+<div class="container" style="padding:0;">
+    <button type="button" class="collapsible" (click)="toggleModule()">{{headerName}}</button>
 
-<!-- <div [hidden]="!show"> -->
-<div *ngIf="show">
-    <ng-content select="section-content"></ng-content>
+    <!-- <div [hidden]="!show"> -->
+    <div *ngIf="show">
+        <ng-content select="section-content"></ng-content>
+    </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DetailByEnv, ErrorDetails, ErrorView, ErrorRow } from '../models/ErrorSummary';
 
@@ -11,6 +11,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./detailed-view.component.css']
 })
 export class DetailedViewComponent implements OnInit {
+  @Input() tcmId: string;
+  @Input() resourceName: string;
+  @Input() isRedis: string;
+
   errorDetails: ErrorDetails[];
   errors500: ErrorDetails[] = [];
   errors400: ErrorDetails[] = [];
@@ -41,25 +45,53 @@ export class DetailedViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getErrorDetails();
+    this.setParams();
+    this.getErrorDetails(true);
   }
 
-  getErrorDetails() {
-    this.sub = this.tcmService.getResourceErrorDetails('123456789', 'tcmeventsvc').subscribe({
-    // this.sub = this.tcmService.getResourceErrorDetailsMock('123456789', 'tcmeventsvc').subscribe({
-        next: errorDetails => {
-            this.errorDetails = errorDetails;
-            errorDetails.forEach(error => {
-                let jsonData = this.parseData(error.data);
-                error.data = jsonData;
-            })
-            // console.log('errorDetails', errorDetails)
-            this.groupErrorsByType();
-            this.mapErrors();
-            // this.splitErrorsByEnv();
-         },
-        error: err => this.errorMessage = err
-      });
+  setParams() {
+    // If query params not available, use hard-coded values
+    if (!this.tcmId) {
+        this.tcmId = '123456789'
+    }
+    if (!this.resourceName) {
+        this.resourceName = 'tcmeventsvc';
+    }
+    if (!this.isRedis) {
+        this.isRedis = 'false'
+    }
+  }
+
+  getErrorDetails(isMock: boolean) {
+    if (isMock) {
+        this.sub = this.tcmService.getResourceErrorDetailsMock(this.tcmId, this.resourceName).subscribe({
+            next: errorDetails => {
+                console.log('errorDetails from mock', errorDetails);
+                this.errorDetails = errorDetails;
+                if (this.errorDetails) {
+                    this.groupErrorsByType();
+                    this.mapErrors();
+                }
+             },
+            error: err => this.errorMessage = err
+          });
+    } else {
+        this.sub = this.tcmService.getResourceErrorDetails(this.tcmId, this.resourceName, this.isRedis).subscribe({
+            next: errorDetails => {
+                console.log('errorDetails from service', errorDetails);
+                this.errorDetails = errorDetails;
+                errorDetails.forEach(error => {
+                    let jsonData = this.parseData(error.data);
+                    error.data = jsonData;
+                })
+                // console.log('errorDetails', errorDetails)
+                this.groupErrorsByType();
+                this.mapErrors();
+                // this.splitErrorsByEnv();
+            },
+            error: err => this.errorMessage = err
+        });
+    }
   }
 
   parseData(dataString): any {
@@ -67,6 +99,7 @@ export class DetailedViewComponent implements OnInit {
   }
 
   groupErrorsByType() {
+    console.log('groupErrorsByType', this.errorDetails);
     this.errorDetails.forEach(error => 
         {
             switch (error.errorType) {
@@ -86,8 +119,8 @@ export class DetailedViewComponent implements OnInit {
         }
     );
     // For Angular Material
-    this.dataSource = new MatTableDataSource(this.errorDetails);
-    console.log('dataSource', this.dataSource);
+    // this.dataSource = new MatTableDataSource(this.errorDetails);
+    // console.log('dataSource', this.dataSource);
   }
 
   getCount(data: DetailByEnv[], env: string): number {
@@ -96,6 +129,7 @@ export class DetailedViewComponent implements OnInit {
   }
 
   isNetNew(data: DetailByEnv[]): boolean {
+    console.log('isNetNew called', data);
     if (data) {
         let prod = data.find(ele => ele.env == this.prodEnv);
         let nonprod = data.find(ele => ele.env == this.nonProdEnv);
@@ -105,11 +139,16 @@ export class DetailedViewComponent implements OnInit {
   }
 
     mapErrors() {
+        console.log('mapErrors - errorDetails', this.errorDetails);
         this.setErrorRows();
-        this.setErrorLists(this.errorRows);
+        console.log('mapErrors - errorRows', this.errorRows);
+        if (this.errorRows) {
+            this.setErrorLists(this.errorRows);
+        }
     }
 
     setErrorRows() {
+        console.log('setErrorRows', this.errorDetails);
         this.errorDetails.forEach(error => {
             let prodCount = this.getCount(error.data, this.prodEnv);
             let nonProdCount = this.getCount(error.data, this.nonProdEnv);
@@ -129,6 +168,7 @@ export class DetailedViewComponent implements OnInit {
     }
 
     setErrorLists(errorList: ErrorRow[]) {
+        console.log('setErrorLists', this.errorDetails);
         errorList.forEach(error => 
             {
                 switch (error.errorType) {
