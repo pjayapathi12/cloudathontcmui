@@ -1,5 +1,5 @@
 
-<div class="container" style="background-color: blanchedalmond;">
+<div class="container" style="background-color: blanchedalmond;border: 15px solid;padding: 17px">
     <div class="row">
         <div class="col-sm-4">
             <label>application site</label>
@@ -25,8 +25,11 @@
             <div class="col-sm-4">
                 Prod Env Total
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-4">
                 Non Prod Env Total
+            </div>
+            <div class="col-sm-4">
+                Net Error Total
             </div>
         </div>
         <div class="row" style="border: 1px solid; text-align: center;">
@@ -77,10 +80,13 @@
     
         </div>
     </div>
+    <div>
+        <collapsible-section [headerName]="'View Details'">
+            <section-content>
+              <detailed-view [tcmId]="tcmId" [isRedis]="isRedis" [resourceName]="'tcmeventsvc'"></detailed-view>
+            </section-content>
+          </collapsible-section>
+    </div>
 </div>
 
-<collapsible-section [headerName]="'View Details'">
-    <section-content>
-      <detailed-view [tcmId]="tcmId" [isRedis]="isRedis" [resourceName]="'tcmeventsvc'"></detailed-view>
-    </section-content>
-  </collapsible-section>
+

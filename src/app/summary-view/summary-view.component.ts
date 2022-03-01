@@ -31,7 +31,7 @@ export class SummaryViewComponent implements OnInit {
     tcmId: string;							  //
     isRedis: string;							//
     public resourceChartOptions: Partial<ChartOptions>[][] = [];
-    public apps:Array<string> = ['ALL','bwflegacysvc','clientauth']; 
+    public apps:Array<string> = ['ALL']; 
     public selectedAppOption:string;
     public nonProdEnvs:Array<string> = ['QA','QA1']; 
     public selectedNonProdEnvOption:string;
@@ -77,6 +77,8 @@ export class SummaryViewComponent implements OnInit {
 
       this.resoureErrorSummary.forEach(
         resourceError => {
+
+          this.apps.push(resourceError.resourceName);
 
           let resourceChartOptionsRow: Partial<ChartOptions>[] = [];
           
