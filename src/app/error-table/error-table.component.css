@@ -9,8 +9,14 @@ th, td {
     border: 1px solid rgb(145, 145, 145);
 }
 
+th {
+    background-color: rgb(70, 70, 70);
+    color: white;
+    font-weight: 500;
+}
+
 .error-color {
-    background-color: red;
+    background-color: #E6191D;
     /* color: red; */
     /* font-weight: bold; */
 }
@@ -19,4 +25,11 @@ th, td {
     background-color: orange;
     /* color: orange; */
     /* font-weight: bold; */
+}
+
+.red-flag {
+    color: red;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
 }
