@@ -10,7 +10,7 @@
                     <th>JIRA</th>
                     <th>JIRA Status</th>
                     <th>Net New</th>
-                    <!-- <th>Issue</th> -->
+                    <!-- <th>Attention</th> -->
                 </tr>
                 <!-- Highlights whole row -->
                 <!-- <tr *ngFor="let error of errorData" [ngClass]="{'error-color': error.isNetNew && error.jiraStatus != 'Closed', 'warning-color': error.isNetNew  && error.jiraStatus == 'Closed'}"> -->
@@ -24,7 +24,7 @@
                     <td *ngIf="!error.jira" class="error-color">Missing</td>
                     <td>{{error.jiraStatus}}</td>
                     <td [ngClass]="{'error-color': error.isNetNew && error.jiraStatus != 'Closed', 'warning-color': error.isNetNew  && error.jiraStatus == 'Closed'}">{{error.isNetNew}}</td>
-                    <!-- <td>{{error.issueDescription}}</td> -->
+                    <td class="red-flag" *ngIf="error.isNetNew && error.jiraStatus != 'Closed'">* Requires MD Approval</td>
                 </tr>
     </table>
 </div>   
