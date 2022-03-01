@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { CollapsibleSectionComponent, SectionContentDirective  } from  './collapsible-section/collapsible-section.component';
@@ -36,7 +37,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     MatProgressSpinnerModule, 
     MatSortModule, 
     MatTableModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    FormsModule
   ],
   bootstrap: [AppComponent]
 })

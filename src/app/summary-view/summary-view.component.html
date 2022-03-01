@@ -1,84 +1,80 @@
-<!-- <p>summary-view works!</p> -->
-<!-- <div style="width:0px;height:50px">
-    <canvas id="myChart"></canvas>
-</div> -->
-
 
 <div class="container" style="background-color: blanchedalmond;">
     <div class="row">
         <div class="col-sm-4">
             <label>application site</label>
-            <form>
-                <select>
-                    <option value="bwflegacysvc"> bwflegacysvc
-                    </option>
-                    <option value="clientauth"> clientauth
-                    </option>
-                </select>
-            </form>
+                <select [(ngModel)]="selectedAppOption" (change)="selectAppChange()">
+                    <option *ngFor="let app of apps" [value]="app">{{app}}</option>
+                </select> 
         </div>
         <div class="col-sm-8">
             <label>Non Prod Env</label>
-            <form>
-                <select>
-                    <option value="qa"> QA
-                    </option>
-                    <option value="qa1"> QA1
-                    </option>
-                </select>
-            </form>
+                <select [(ngModel)]="selectedNonProdEnvOption" (change)="selectNonProdEnvChange()">
+                    <option *ngFor="let env of nonProdEnvs" [value]="env">{{env}}</option>
+                </select> 
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4">
-            Prod Env Total
-        </div>
-        <div class="col-sm-8">
-            Non Prod Env Total
-        </div>
-    </div>
-    <div class="row" style="border: 1px solid; text-align: center;">
-        <div class="col-sm-4">
-            <h2>{{prodErrCount}}</h2>
-        </div>
-        <div class="col-sm-8">
-            <h2>{{qaErrCount}}</h2>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <h3 style="text-align: center;">Error Count</h3>
-            <div id="chart">
-                <apx-chart
-                  [series]="prodChartOptions.series"
-                  [chart]="prodChartOptions.chart"
-                  [labels]="prodChartOptions.labels"
-                  [responsive]="prodChartOptions.responsive"
-                ></apx-chart>
+    <div *ngFor="let errorSummary of resoureErrorSummary; let i = index">
+        <div class="row" style="border: 1px solid; text-align: center;">
+            <div class="col-sm-12">
+                <b>{{resoureErrorSummary[i].resourceName}}</b>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="">
-                <div class="col-sm-5" id="chart">
-                    <h3 style="text-align: center;">Error Count</h3>
+        <div class="row" style="border: 1px solid; text-align: center;">
+            <div class="col-sm-4">
+                Prod Env Total
+            </div>
+            <div class="col-sm-8">
+                Non Prod Env Total
+            </div>
+        </div>
+        <div class="row" style="border: 1px solid; text-align: center;">
+            <div class="col-sm-4">
+                <h2>{{resoureErrorSummary[i].summaryViewStats[0].totalCount}}</h2>
+            </div>
+            <div class="col-sm-4">
+                <h2>{{resoureErrorSummary[i].summaryViewStats[1].totalCount}}</h2>
+            </div>
+            <div class="col-sm-4">
+                <h2>{{resoureErrorSummary[i].summaryViewStats[2].totalCount}}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <h3 style="text-align: center;">Prod Error Count</h3>
+                <div id="chart">
                     <apx-chart
-                    [series]="qaChartOptions.series"
-                    [chart]="qaChartOptions.chart"
-                    [labels]="qaChartOptions.labels"
-                    [responsive]="qaChartOptions.responsive"
-                    ></apx-chart>
-                </div>
-                <div class="col-sm-5" id="chart">
-                    <h3 style="text-align: center;">Net New Error Count</h3>
-                    <apx-chart
-                    [series]="netNewChartOptions.series"
-                    [chart]="netNewChartOptions.chart"
-                    [labels]="netNewChartOptions.labels"
-                    [responsive]="netNewChartOptions.responsive"
+                    [series]="this.resourceChartOptions[i][0].series"
+                    [chart]="this.resourceChartOptions[i][0].chart"
+                    [labels]="this.resourceChartOptions[i][0].labels"
+                    [responsive]="this.resourceChartOptions[i][0].responsive"
                     ></apx-chart>
                 </div>
             </div>
-            
+            <div class="col-sm-4">
+                <h3 style="text-align: center;"> QA Error Count</h3>
+                <div id="chart">
+                    <apx-chart
+                    [series]="this.resourceChartOptions[i][1].series"
+                    [chart]="this.resourceChartOptions[i][1].chart"
+                    [labels]="this.resourceChartOptions[i][1].labels"
+                    [responsive]="this.resourceChartOptions[i][1].responsive"
+                    ></apx-chart>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h3 style="text-align: center;">Net Error Count</h3>
+                <div id="chart">
+                    <apx-chart
+                    [series]="this.resourceChartOptions[i][2].series"
+                    [chart]="this.resourceChartOptions[i][2].chart"
+                    [labels]="this.resourceChartOptions[i][2].labels"
+                    [responsive]="this.resourceChartOptions[i][2].responsive"
+                    ></apx-chart>
+                </div>
+            </div>
+    
         </div>
     </div>
 </div>
