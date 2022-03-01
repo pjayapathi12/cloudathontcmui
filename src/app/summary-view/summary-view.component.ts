@@ -25,8 +25,11 @@ export type ChartOptions = {
   styleUrls: ['./summary-view.component.css']
 })
 export class SummaryViewComponent implements OnInit {
-    @Input() tcmId: string;//Manual merge
-    @Input() isRedis: string;//Manual merge
+    //@Input() tcmId: string;//Manual merge				//
+  //@Input() isRedis: string;//Manual merge				//
+  
+    tcmId: string;							  //
+    isRedis: string;							//
     public resourceChartOptions: Partial<ChartOptions>[][] = [];
     public apps:Array<string> = ['ALL','bwflegacysvc','clientauth']; 
     public selectedAppOption:string;
@@ -41,6 +44,7 @@ export class SummaryViewComponent implements OnInit {
    
 
   ngOnInit(): void {
+    this.getContext();
     this.selectedAppOption = 'ALL';
     this.selectedNonProdEnvOption = 'QA';
     this.setParams();//Manual merge
@@ -199,5 +203,24 @@ export class SummaryViewComponent implements OnInit {
     }
   }
 
+  getContext() {											//
+    this.tcmId = this.getQueryStringValues('tcm');
+    this.isRedis = this.getQueryStringValues('redis');
+    console.log("tcmId::",this.tcmId);
+  }
+
+  getQueryStringValues(key: string): string {								//
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; vars && i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (decodeURIComponent(pair[0]) == key) {
+        console.log('Query variable found for ' + key + ': ', decodeURIComponent(pair[1]));
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    console.log('Query variable not found', key);
+    return '';
+  }
 
 }

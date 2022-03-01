@@ -1,5 +1,5 @@
 export interface TcmInfo {
-    tcmId: string;
+    tcm: string;
     eonId: string;
     submitterId: string;
 }

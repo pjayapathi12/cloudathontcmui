@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="error-heading">My Pending Approvals</div>
+        <div class="container">
+            <table *ngIf="tcmList && tcmList.length > 0">
+                        <tr>
+                            <th>TCM</th>
+                            <th>EON ID</th>
+                            <th>Submitted By</th>
+                            <th>Status</th>
+                            <th>Error Report</th>
+                            <th>Approvals</th>
+                            
+                            <!-- <th>Issue</th> -->
+                        </tr>
+                        <!-- Highlights whole row -->
+                        <!-- <tr *ngFor="let error of errorData" [ngClass]="{'error-color': error.isNetNew && error.jiraStatus != 'Closed', 'warning-color': error.isNetNew  && error.jiraStatus == 'Closed'}"> -->
+                        <tr *ngFor="let tcm of tcmList">
+                            <td>{{tcm.tcm}}</td>
+                            <td>{{tcm.eonId}}</td>
+                            <td>{{tcm.submitterId}}</td>
+                            <td>Pending</td>
+                            <td><a href="./summary?tcm={{tcm.tcm}}" target="_blank">Click Here</a></td>
+                            <td><a>Approve/Reject</a></td>
+                            <!-- <td>{{error.issueDescription}}</td> -->
+                        </tr>
+            </table>
+        </div>   
+    </div>
+    <br>
+</div>
+
+

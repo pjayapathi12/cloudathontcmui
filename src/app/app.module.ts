@@ -16,6 +16,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ErrorTableComponent } from './error-table/error-table.component';
 import { SummaryViewComponent } from './summary-view/summary-view.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { ApprovalViewComponent } from './approval-view/approval-view.component';   //
+import { TCMRoutingModule } from './app-routing.module';                           //
 
 
 @NgModule({
@@ -25,7 +27,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     ErrorTableComponent,
     SummaryViewComponent,
     CollapsibleSectionComponent,
-    SectionContentDirective 
+    SectionContentDirective,
+    ApprovalViewComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     MatSortModule, 
     MatTableModule,
     NgApexchartsModule,
-    FormsModule
+    FormsModule,
+    TCMRoutingModule
   ],
   bootstrap: [AppComponent]
 })
