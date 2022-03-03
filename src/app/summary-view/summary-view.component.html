@@ -2,37 +2,40 @@
 <div class="container" style="background-color: blanchedalmond;border: 15px solid;padding: 17px">
     <div class="row">
         <div class="col-sm-4">
-            <label>application site</label>
+            <label class="filter-label">Application Site</label>
                 <select [(ngModel)]="selectedAppOption" (change)="selectAppChange()">
                     <option *ngFor="let app of apps" [value]="app">{{app}}</option>
                 </select> 
         </div>
         <div class="col-sm-8">
-            <label>Non Prod Env</label>
+            <label class="filter-label">Non Prod Env</label>
                 <select [(ngModel)]="selectedNonProdEnvOption" (change)="selectNonProdEnvChange()">
                     <option *ngFor="let env of nonProdEnvs" [value]="env">{{env}}</option>
                 </select> 
         </div>
     </div>
     <div class="row">
-    <div *ngFor="let errorSummary of resoureErrorSummary; let i = index">
-        <div class="row" style="border: 1px solid; text-align: center;">
-            <div class="col-sm-12">
-                <b>{{resoureErrorSummary[i].resourceName}}</b>
+    <div *ngFor="let errorSummary of resoureErrorSummary; let i = index" class="app-summary">
+        <div class="row" style="border: 2px solid; text-align: center;">
+            <div class="col-sm-12 section-header">
+                <span>{{resoureErrorSummary[i].resourceName}}</span>
             </div>
         </div>
-        <div class="row" style="border: 1px solid; text-align: center;">
-            <div class="col-sm-4">
+        <div class="row" style="border-bottom: 1px solid; text-align: center;">
+            <div class="col-sm-4 count-header">
+                <!-- PROD TOTAL -->
                 Prod Env Total
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 count-header">
+                <!-- NON PROD TOTAL -->
                 Non Prod Env Total
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-4 count-header">
+                <!-- NET ERROR TOTAL -->
                 Net Error Total
             </div>
         </div>
-        <div class="row" style="border: 1px solid; text-align: center;">
+        <div class="row" style="border-bottom: 1px solid; text-align: center;">
             <div class="col-sm-4">
                 <h2>{{resoureErrorSummary[i].summaryViewStats[0].totalCount}}</h2>
             </div>
@@ -79,14 +82,21 @@
             </div>
     
         </div>
+        <div>
+            <collapsible-section [headerName]="'+  Show Details'" [collapsedHeader]="'-  Hide Details'">
+                <section-content>
+                  <detailed-view [tcmId]="tcmId" [isRedis]="isRedis" [resourceName]="resoureErrorSummary[i].resourceName"></detailed-view>
+                </section-content>
+              </collapsible-section>
+        </div>
     </div>
-    <div>
+    <!-- <div>
         <collapsible-section [headerName]="'View Details'">
             <section-content>
               <detailed-view [tcmId]="tcmId" [isRedis]="isRedis" [resourceName]="'tcmeventsvc'"></detailed-view>
             </section-content>
           </collapsible-section>
-    </div>
+    </div> -->
 </div>
 
 

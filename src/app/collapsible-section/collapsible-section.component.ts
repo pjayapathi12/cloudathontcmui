@@ -8,6 +8,7 @@ import { Component, Directive, Input, OnInit } from '@angular/core';
 export class CollapsibleSectionComponent implements OnInit {
   
     @Input() headerName: string;
+    @Input() collapsedHeader: string;
     show: boolean;
 
     constructor() { }
